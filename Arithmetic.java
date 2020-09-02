@@ -13,18 +13,17 @@ public class Arithmetic {
   Scanner sc= new Scanner(System.in);
   String repeat="yes";
   int i=0;
-  
+  int timelimit=0;
   while(repeat.equals("yes"))
   {
-  
   i++;
-  Training session=new Training();
-  System.out.println("session "+i+"\n");
-  // way to calculate total points 
-  System.out.println("total points in the following manner:\n"
-  +"Time limit(30s)  Under         Over\n"+"Correct Ans      4(10)         3(6)\n"
-  +"Wrong Ans        2(3)          1(0)\n"+"TOTAL POINTS: 64 (40 + 18 + 6 + 0)\n");
+  System.out.print("enter time limit (per question) for session "+i+"\n");
+  timelimit=sc.nextInt();
+  Training session=new Training(timelimit);
   
+  System.out.println("total points in the following manner:\n"
+  +"Time limit("+timelimit+"s)  Under         Over\n"+"Correct Ans      4(10)         3(6)\n"
+  +"Wrong Ans        2(3)          1(0)\n"+"TOTAL POINTS: 64 (40 + 18 + 6 + 0)\n");
   session.test();
 
   System.out.println("if you want an other session enter yes or enter something else to terminate:  ");
@@ -165,8 +164,14 @@ Scanner sc;
 private int time;
 private int point;
 private boolean check;
-  public Training ()
+private int timelimit;
+  public Training()
   {
+    this(30);
+  }
+  public Training (int timelimit)
+  {
+  this.timelimit=timelimit;
   sc =new Scanner(System.in); 
   f1= new Fraction(); 
   f2= new Fraction();
@@ -187,7 +192,7 @@ private boolean check;
    System.out.println("right answer");
    else
   System.out.println("wrong answer\n   right answer is "+f.getFraction());
-  System.out.println("you got "+getTotalPoint()+" points");
+  System.out.println("you have "+getTotalPoint()+" points");
  
   }
   
@@ -257,7 +262,7 @@ private boolean check;
   public void stopTiming()
  {
   stop = new Date();
-  this.time=(int)(stop.getTime()-start.getTime())/1000;
+this.time=(int)(stop.getTime()-start.getTime())/1000;
   }
   
   public boolean checkAns(String       
@@ -273,15 +278,12 @@ private boolean check;
   
   public int getTotalPoint()
   {
-    if(check&& time<=30)
+    if(check&& time<=timelimit)
     point+=10;//right answer under time limit
-    
-    else if(check&& time>30)
+    else if(check&& time>timelimit)
     point+=6;//right answer over time limit
-    
-    else if(!check&& time<=30)
+    else if(!check&& time<=timelimit)
     point+=3;//wrong answer under time limit
-   
     else
     point+=0;//wrong answer over time limit
     return point;
