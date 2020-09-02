@@ -12,15 +12,19 @@ public class Arithmetic {
   
   Scanner sc= new Scanner(System.in);
   String repeat="yes";
-  
-  
-  while(repeat=="yes")
-  {
   int i=0;
+  
+  while(repeat.equals("yes"))
+  {
+  
   i++;
   Training session=new Training();
   System.out.println("session "+i+"\n");
-  System.out.println("total points in the following manner:\n"+"Time limit(30s)  Under         Over\n"+"Correct Ans      4(10)         3(6)\n"+"Wrong Ans        2(3)          1(0)\n"+"TOTAL POINTS: 64 (40 + 18 + 6 + 0)\n");
+  // way to calculate total points 
+  System.out.println("total points in the following manner:\n"
+  +"Time limit(30s)  Under         Over\n"+"Correct Ans      4(10)         3(6)\n"
+  +"Wrong Ans        2(3)          1(0)\n"+"TOTAL POINTS: 64 (40 + 18 + 6 + 0)\n");
+  
   session.test();
 
   System.out.println("if you want an other session enter yes or enter something else to terminate:  ");
@@ -253,7 +257,7 @@ private boolean check;
   public void stopTiming()
  {
   stop = new Date();
-this.time=(int)(stop.getTime()-start.getTime())/1000;
+  this.time=(int)(stop.getTime()-start.getTime())/1000;
   }
   
   public boolean checkAns(String       
@@ -271,10 +275,13 @@ this.time=(int)(stop.getTime()-start.getTime())/1000;
   {
     if(check&& time<=30)
     point+=10;//right answer under time limit
+    
     else if(check&& time>30)
     point+=6;//right answer over time limit
+    
     else if(!check&& time<=30)
     point+=3;//wrong answer under time limit
+   
     else
     point+=0;//wrong answer over time limit
     return point;
