@@ -6,7 +6,7 @@ import java.util.Scanner;
 import fractionarithmetic.Fraction;
 import fractionarithmetic.Training;
 
-public class UpdatedArithmetic {
+public class Arithmetic {
 
   public static void main(String[] args) {
   
@@ -22,14 +22,14 @@ public class UpdatedArithmetic {
   System.out.println("session "+i+"\n");
   System.out.println("total points in the following manner:\n"+"Time limit(30s)  Under         Over\n"+"Correct Ans      4(10)         3(6)\n"+"Wrong Ans        2(3)          1(0)\n"+"TOTAL POINTS: 64 (40 + 18 + 6 + 0)\n");
   session.test();
-  System.out.println("you got "+session.getTotalPoint()+" points out of 100 ");
+
   System.out.println("if you want an other session enter yes or enter something else to terminate:  ");
   repeat=sc.next();
   
   
   }//end while loop
-  }
-}
+  }//end main()
+}//end Arithmetic{}
 
   class Fraction {
     private int num;
@@ -137,9 +137,9 @@ public class UpdatedArithmetic {
       {
        n=num/i;
        dn=denom/i;
-       }  
+       }  //end if
        
-     }
+     }//end for loop
  
     if(dn==0)
      return "error! zero can't be denom";
@@ -148,8 +148,8 @@ public class UpdatedArithmetic {
     else
      return n+"/"+dn;
      
-   }
-   }
+   }//end getFraction()
+   }//end Fraction{}
    
    
    
@@ -167,6 +167,9 @@ private boolean check;
   f1= new Fraction(); 
   f2= new Fraction();
   f = new Fraction(); 
+  time=0;
+  point=0;
+  check=false;
   }
   
   public void answer(Fraction f)
@@ -202,27 +205,35 @@ private boolean check;
    {
    case 1:
    f=f1.add(f2);
+   //question
    System.out.println(f1.getNum()+"/"+f1.getdenom()+" + "+f2.getNum()+"/"+f2.getdenom()+" = ?");
+   //answer
   answer(f);
   break;
   
   
  case 2:
  f=f1.sub(f2);
+   //question
    System.out.println(f1.getNum()+"/"+f1.getdenom()+" - "+f2.getNum()+"/"+f2.getdenom()+" = ?");
+   //answer
    answer(f);
   break;
   
    
   case 3:
   f=f1.mul(f2);
+   //question
    System.out.println(f1.getNum()+"/"+f1.getdenom()+" * "+f2.getNum()+"/"+f2.getdenom()+" = ?");
-    answer(f);
-  break;
+   //answer
+   answer(f);
+   break;
   
   case 4 :
-  f=f1.div(f2);
+  f=f1.div(f2); 
+   //question
    System.out.println(f1.getNum()+"/"+f1.getdenom()+" / "+f2.getNum()+"/"+f2.getdenom()+" = ?");
+  //answer
   answer(f);
   break;
   default :
@@ -230,7 +241,7 @@ private boolean check;
    }//end switch
    
     }//end for loop    
-    
+    System.out.println("out of 100");
   }// emd test()
    
   
@@ -259,13 +270,13 @@ this.time=(int)(stop.getTime()-start.getTime())/1000;
   public int getTotalPoint()
   {
     if(check&& time<=30)
-    point+=10;
+    point+=10;//right answer under time limit
     else if(check&& time>30)
-    point+=6;
+    point+=6;//right answer over time limit
     else if(!check&& time<=30)
-    point+=3;
+    point+=3;//wrong answer under time limit
     else
-    point+=0;
+    point+=0;//wrong answer over time limit
     return point;
-  }
-}
+  }//end getTotalpoint()
+}//end Training{}
